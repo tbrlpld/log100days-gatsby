@@ -2,15 +2,46 @@
 
 const { fixRelativeLinksForGatsby } = require('../../src/templates/logpage.jsx')
 
+/*
+Solve links between pages. Because Gatsby creates every page as its own directory
+with a `index.html` in it, the URL have a trailing `/`.
+
+This also means that the relative markdown links that are going up are wrong.
+E.g. the `/intl/de/README.md` defines a link as  `../es/README.md`. This does
+point to the markdown file `/intl/es/README.md` correctly. But when the page is
+build with Gatsby, then the links is looking for `/intl/de/es/README.md` because
+ the current URL position is a directory out of which we have to navigate.
+
+This means these links need to be prepended with another `../` to compensate for
+that.
+
+Also, relative links to sibling files are not working. E.g. when in `/README.md`
+a markdown link may define a link to the file `rules.md`. Now this works when
+dealing with files, because this is a relative link (because it does not start
+with a `/`). But because of the Gatsby structure the URL is a directory and the
+link points to `/REAMDE.md/rules.md`. I guess this would also be solved by
+prepending `../`.
+
+So I will have to parse all the links and update the href attribute. Everything
+that is not an absolute path (starting with `/` , `http`) needs to be prepended
+with `../` to navigate out of the current directory.
+*/
 describe('Fix relative markdown links for Gatsby', () => {
-  it('adds ../ to sibling link', () => {
+  it('adds ../ to sibling link.', () => {
     const html = '<div><a href="sibling.md"></a></div>'
     const fixedHtml = fixRelativeLinksForGatsby(html)
     expect(fixedHtml).toContain('href="../sibling.md"')
     expect(fixedHtml).not.toContain('href="sibling.md"')
   })
 
-  it('leaves absolute local link as is', () => {
+  it('adds ../ to local relative link to file in other directory.', () => {
+    const html = '<div><a href="../other-parent/child.md"></a></div>'
+    const fixedHtml = fixRelativeLinksForGatsby(html)
+    expect(fixedHtml).toContain('href="../../other-parent/child.md"')
+    expect(fixedHtml).not.toContain('href="../other-parent/child.md"')
+  })
+
+  it('leaves absolute local link as is.', () => {
     const html = '<div><a href="/sibling.md"></a></div>'
     const fixedHtml = fixRelativeLinksForGatsby(html)
     expect(fixedHtml).toContain('href="/sibling.md"')
