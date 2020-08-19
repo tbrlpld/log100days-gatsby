@@ -4,6 +4,7 @@ import { graphql } from 'gatsby'
 import cheerio from 'cheerio'
 
 import Layout from '../components/layout'
+import SEO from '../components/seo'
 
 export const fixRelativeLinksForGatsby = (html) => {
   const $ = cheerio.load(html)
@@ -43,13 +44,17 @@ export const fixSlugInLocalMarkdownLinks = (html) => {
 }
 
 export const LogPage = ({ data }) => {
+  const pageName = data.markdownRemark.parent.name
   const html = data.markdownRemark.html
   const htmlWithFixedRelativeLinks = fixRelativeLinksForGatsby(html)
   const htmlWithFixedLinkSlugs = fixSlugInLocalMarkdownLinks(htmlWithFixedRelativeLinks)
   return (
-    <Layout>
-      <div dangerouslySetInnerHTML={{ __html: htmlWithFixedLinkSlugs }} />
-    </Layout>
+    <>
+      <SEO title={pageName} />
+      <Layout>
+        <div dangerouslySetInnerHTML={{ __html: htmlWithFixedLinkSlugs }} />
+      </Layout>
+    </>
   )
 }
 export default LogPage
@@ -61,6 +66,11 @@ export const query = graphql`
         slug
       }
       html
+      parent {
+        ... on File {
+          name
+        }
+      }
     }
   }
 `
