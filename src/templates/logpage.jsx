@@ -20,6 +20,15 @@ export const fixRelativeLinksForGatsby = (html) => {
   return $.html()
 }
 
+export const fixSlugInLocalMarkdownLinks = (html) => {
+  const $ = cheerio.load(html)
+  $('a[href]').toArray().map((elem) => {
+    if (elem.attribs.href.endsWith('.md')) { elem.attribs.href = elem.attribs.href.slice(0, -3) + '/' }
+    return elem
+  })
+  return $.html()
+}
+
 export const LogPage = ({ data }) => {
   const html = data.allMarkdownRemark.edges[0].node.html
   const htmlWithFixedLinks = fixRelativeLinksForGatsby(html)
