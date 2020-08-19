@@ -56,7 +56,7 @@ describe('Fix relative markdown links for Gatsby', () => {
   it('leaves external link (https) as is.', () => {
     const html = '<div><a href="https://example.com"></a></div>'
     const fixedHtml = fixRelativeLinksForGatsby(html)
-    expect(fixedHtml).toContain('href="http://example.com"')
+    expect(fixedHtml).toContain('href="https://example.com"')
   })
 
   it('leaves mail link as is.', () => {
