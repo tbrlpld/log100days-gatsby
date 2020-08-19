@@ -41,7 +41,7 @@ export const fixSlugInLocalMarkdownLinks = (html) => {
 }
 
 export const LogPage = ({ data }) => {
-  const html = data.allMarkdownRemark.edges[0].node.html
+  const html = data.markdownRemark.html
   const htmlWithFixedRelativeLinks = fixRelativeLinksForGatsby(html)
   const htmlWithFixedLinkSlugs = fixSlugInLocalMarkdownLinks(htmlWithFixedRelativeLinks)
   return <div dangerouslySetInnerHTML={{ __html: htmlWithFixedLinkSlugs }} />
@@ -49,16 +49,12 @@ export const LogPage = ({ data }) => {
 export default LogPage
 
 export const query = graphql`
-  query ($slug: String) {
-    allMarkdownRemark(filter: {fields: {slug: {eq: $slug}}}) {
-      edges {
-        node {
-          fields {
-            slug
-          }
-          html
-        }
+  query ($slug: String!) {
+    markdownRemark(fields: {slug: {eq: $slug}}) {
+      fields {
+        slug
       }
+      html
     }
   }
 `
