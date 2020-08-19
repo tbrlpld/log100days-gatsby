@@ -9,9 +9,8 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   // Add slugs to markdown nodes
   if (node.internal.type === 'MarkdownRemark') {
     const fileNode = getNode(node.parent)
-    let slug = path.join(fileNode.relativeDirectory, fileNode.name)
+    let slug = fileNode.relativePath
     if (!slug.startsWith('/')) { slug = '/' + slug }
-    if (!slug.endsWith('/')) { slug = slug + '/' }
 
     const { createNodeField } = actions
     createNodeField({
@@ -43,7 +42,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
   const logTemplate = path.resolve('./src/templates/logpage.jsx')
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    console.log('Creating page: ', node.fields.slug)
+    console.log('Creating page:', node.fields.slug)
     createPage({
       path: node.fields.slug,
       component: logTemplate,

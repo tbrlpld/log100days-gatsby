@@ -2,7 +2,8 @@ import React from 'react'
 import { graphql } from 'gatsby'
 
 const LogPage = ({ data }) => {
-  return <div>This is there the page goes</div>
+  const html = data.allMarkdownRemark.edges[0].node.html
+  return <div dangerouslySetInnerHTML={{ __html: html }} />
 }
 export default LogPage
 
@@ -14,6 +15,7 @@ export const query = graphql`
           fields {
             slug
           }
+          html
         }
       }
     }
