@@ -23,7 +23,11 @@ export const fixRelativeLinksForGatsby = (html) => {
 export const fixSlugInLocalMarkdownLinks = (html) => {
   const $ = cheerio.load(html)
   $('a[href]').toArray().map((elem) => {
-    if (elem.attribs.href.endsWith('.md')) { elem.attribs.href = elem.attribs.href.slice(0, -3) + '/' }
+    if (elem.attribs.href.endsWith('.md')) {
+      elem.attribs.href = elem.attribs.href.slice(0, -3) + '/'
+    } else if (elem.attribs.href.endsWith('.md/')) {
+      elem.attribs.href = elem.attribs.href.slice(0, -4) + '/'
+    }
     return elem
   })
   return $.html()

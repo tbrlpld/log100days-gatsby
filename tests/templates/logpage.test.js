@@ -80,4 +80,11 @@ describe('Update local markdown to slug definition', () => {
     expect(fixedHtml).toContain('href="sibling/"')
     expect(fixedHtml).not.toContain('href="sibling.md"')
   })
+
+  it('removes .md from sibling link already ending with /.', () => {
+    const html = '<div><a href="sibling.md/"></a></div>'
+    const fixedHtml = fixSlugInLocalMarkdownLinks(html)
+    expect(fixedHtml).toContain('href="sibling/"')
+    expect(fixedHtml).not.toContain('href="sibling.md/"')
+  })
 })
