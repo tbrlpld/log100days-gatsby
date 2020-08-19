@@ -36,6 +36,12 @@ module.exports = {
         name: 'log',
         remote: 'https://github.com/tbrlpld/100-days-of-code'
       }
+    },
+    {
+      resolve: 'gatsby-transformer-remark',
+      options: {
+        gfm: true
+      }
     }
   ]
 }
