@@ -2,8 +2,11 @@
 
 const { fixRelativeLinksForGatsby } = require('../../src/templates/logpage.jsx')
 
-describe('Fix relative links for Gatsby', () => {
-  it('exists', () => {
-    fixRelativeLinksForGatsby()
+describe('Fix relative markdown links for Gatsby', () => {
+  it('adds ../ to sibling link', () => {
+    const html = '<div><a href="sibling.md"></a></div>'
+    const fixedHtml = fixRelativeLinksForGatsby(html)
+    expect(fixedHtml).toContain('href="../sibling.md"')
+    expect(fixedHtml).not.toContain('href="sibling.md"')
   })
 })

@@ -1,8 +1,15 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 
-export const fixRelativeLinksForGatsby = () => {
-  return undefined
+import cheerio from 'cheerio'
+
+export const fixRelativeLinksForGatsby = (html) => {
+  const $ = cheerio.load(html)
+  $('a[href]').toArray().map((elem) => {
+    elem.attribs.href = '../' + elem.attribs.href
+    return elem
+  })
+  return $.html()
 }
 
 export const LogPage = ({ data }) => {
