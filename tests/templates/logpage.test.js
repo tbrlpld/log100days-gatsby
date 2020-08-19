@@ -1,6 +1,7 @@
 /* eslint-env jest */
 
 const { fixRelativeLinksForGatsby } = require('../../src/templates/logpage.jsx')
+const { fixSlugInLocalMarkdownLinks } = require('../../src/templates/logpage.jsx')
 
 /*
 Solve links between pages. Because Gatsby creates every page as its own directory
@@ -69,5 +70,14 @@ describe('Fix relative markdown links for Gatsby', () => {
     const html = '<div><a href="tel:+123456789"></a></div>'
     const fixedHtml = fixRelativeLinksForGatsby(html)
     expect(fixedHtml).toContain('href="tel:+123456789"')
+  })
+})
+
+describe('Update local markdown to slug definition', () => {
+  it('removes .md and adds trailing / to sibling link.', () => {
+    const html = '<div><a href="sibling.md"></a></div>'
+    const fixedHtml = fixSlugInLocalMarkdownLinks(html)
+    expect(fixedHtml).toContain('href="sibling/"')
+    expect(fixedHtml).not.toContain('href="sibling.md"')
   })
 })
