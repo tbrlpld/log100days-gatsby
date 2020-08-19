@@ -3,5 +3,47 @@
  *
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
+const path = require('path')
 
-// You can delete this file if you're not using it
+exports.onCreateNode = ({ node, getNode, actions }) => {
+  // Add slugs to markdown nodes
+  if (node.internal.type === 'MarkdownRemark') {
+    const fileNode = getNode(node.parent)
+    let slug = path.join(fileNode.relativeDirectory, fileNode.name)
+    if (!slug.startsWith('/')) { slug = '/' + slug }
+    if (!slug.endsWith('/')) { slug = slug + '/' }
+
+    console.log(slug)
+    const { createNodeField } = actions
+    createNodeField({
+      node,
+      name: 'slug',
+      value: slug
+    })
+  }
+}
+
+// exports.createPages = async ({ graphql, actions, reporter }) => {
+//   const result = await graphql(`
+//     query {
+//       allMarkdownRemark {
+//         edges {
+//           node {
+//             id
+//             parent {
+//               id
+//               ... on File {
+//                 name
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   `)
+//   if (result.error) {
+//     reporter.panicOnBuild('Error while running GraphQL query.')
+//   }
+
+//   const { createPage } = actions
+// }

@@ -34,7 +34,8 @@ module.exports = {
       resolve: 'gatsby-source-git',
       options: {
         name: 'log',
-        remote: 'https://github.com/tbrlpld/100-days-of-code'
+        // remote: 'https://github.com/tbrlpld/100-days-of-code'
+        remote: 'https://github.com/kallaway/100-days-of-code'
       }
     },
     {
