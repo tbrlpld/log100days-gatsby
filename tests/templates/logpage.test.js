@@ -46,4 +46,10 @@ describe('Fix relative markdown links for Gatsby', () => {
     const fixedHtml = fixRelativeLinksForGatsby(html)
     expect(fixedHtml).toContain('href="/sibling.md"')
   })
+
+  it('leaves external link as is.', () => {
+    const html = '<div><a href="http://example.com"></a></div>'
+    const fixedHtml = fixRelativeLinksForGatsby(html)
+    expect(fixedHtml).toContain('href="http://example.com"')
+  })
 })
