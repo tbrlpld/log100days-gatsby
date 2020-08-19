@@ -22,6 +22,15 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 }
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
+  const { createRedirect } = actions
+  createRedirect({
+    fromPath: '/',
+    toPath: '/README.md',
+    force: true,
+    redirectInBrowser: true,
+    statusCode: 200
+  })
+
   const result = await graphql(`
     query {
       allMarkdownRemark {
