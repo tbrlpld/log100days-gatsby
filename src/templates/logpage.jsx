@@ -6,7 +6,9 @@ import cheerio from 'cheerio'
 export const fixRelativeLinksForGatsby = (html) => {
   const $ = cheerio.load(html)
   $('a[href]').toArray().map((elem) => {
-    elem.attribs.href = '../' + elem.attribs.href
+    if (!elem.attribs.href.startsWith('/')) {
+      elem.attribs.href = '../' + elem.attribs.href
+    }
     return elem
   })
   return $.html()
