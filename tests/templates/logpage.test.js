@@ -90,25 +90,25 @@ describe('Update local markdown to slug definition', () => {
 
   it('leaves external link as is (even if ending in .md).', () => {
     const html = '<div><a href="http://example.com/site.md"></a></div>'
-    const fixedHtml = fixRelativeLinksForGatsby(html)
+    const fixedHtml = fixSlugInLocalMarkdownLinks(html)
     expect(fixedHtml).toContain('href="http://example.com/site.md"')
   })
 
   it('leaves external link (https) as is (even if ending in .md).', () => {
     const html = '<div><a href="https://example.com/site.md"></a></div>'
-    const fixedHtml = fixRelativeLinksForGatsby(html)
+    const fixedHtml = fixSlugInLocalMarkdownLinks(html)
     expect(fixedHtml).toContain('href="https://example.com/site.md"')
   })
 
   it('leaves mail link as is (even if ending in .md).', () => {
     const html = '<div><a href="mailto:somebody@example.md"></a></div>'
-    const fixedHtml = fixRelativeLinksForGatsby(html)
+    const fixedHtml = fixSlugInLocalMarkdownLinks(html)
     expect(fixedHtml).toContain('href="mailto:somebody@example.md"')
   })
 
   it('leaves tel link as is.', () => {
     const html = '<div><a href="tel:+123456789"></a></div>'
-    const fixedHtml = fixRelativeLinksForGatsby(html)
+    const fixedHtml = fixSlugInLocalMarkdownLinks(html)
     expect(fixedHtml).toContain('href="tel:+123456789"')
   })
 })
