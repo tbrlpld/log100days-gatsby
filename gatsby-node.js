@@ -13,7 +13,6 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     if (!slug.startsWith('/')) { slug = '/' + slug }
     if (!slug.endsWith('/')) { slug = slug + '/' }
 
-    console.log(slug)
     const { createNodeField } = actions
     createNodeField({
       node,
@@ -23,27 +22,34 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   }
 }
 
-// exports.createPages = async ({ graphql, actions, reporter }) => {
-//   const result = await graphql(`
-//     query {
-//       allMarkdownRemark {
-//         edges {
-//           node {
-//             id
-//             parent {
-//               id
-//               ... on File {
-//                 name
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }
-//   `)
-//   if (result.error) {
-//     reporter.panicOnBuild('Error while running GraphQL query.')
-//   }
+exports.createPages = async ({ graphql, actions, reporter }) => {
+  const result = await graphql(`
+    query {
+      allMarkdownRemark {
+        edges {
+          node {
+            fields {
+              slug
+            }
+          }
+        }
+      }
+    }
+  `)
+  if (result.error) {
+    reporter.panicOnBuild('Error while running GraphQL query.')
+  }
 
-//   const { createPage } = actions
-// }
+  const { createPage } = actions
+  const logTemplate = path.resolve('./src/templates/logpage.jsx')
+  result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    console.log('Creating page: ', node.fields.slug)
+    createPage({
+      path: node.fields.slug,
+      component: logTemplate,
+      context: {
+        slug: node.fields.slug
+      }
+    })
+  })
+}
