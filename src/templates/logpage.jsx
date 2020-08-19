@@ -8,7 +8,10 @@ export const fixRelativeLinksForGatsby = (html) => {
   $('a[href]').toArray().map((elem) => {
     if (
       !elem.attribs.href.startsWith('/') &&
-      !elem.attribs.href.startsWith('http')
+      !elem.attribs.href.startsWith('http://') &&
+      !elem.attribs.href.startsWith('https://') &&
+      !elem.attribs.href.startsWith('mailto:') &&
+      !elem.attribs.href.startsWith('tel:')
     ) {
       elem.attribs.href = '../' + elem.attribs.href
     }
