@@ -22,7 +22,8 @@ export const fixRelativeLinksForGatsby = (html) => {
 
 export const LogPage = ({ data }) => {
   const html = data.allMarkdownRemark.edges[0].node.html
-  return <div dangerouslySetInnerHTML={{ __html: html }} />
+  const htmlWithFixedLinks = fixRelativeLinksForGatsby(html)
+  return <div dangerouslySetInnerHTML={{ __html: htmlWithFixedLinks }} />
 }
 export default LogPage
 
