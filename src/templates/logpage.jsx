@@ -42,8 +42,9 @@ export const fixSlugInLocalMarkdownLinks = (html) => {
 
 export const LogPage = ({ data }) => {
   const html = data.allMarkdownRemark.edges[0].node.html
-  const htmlWithFixedLinks = fixRelativeLinksForGatsby(html)
-  return <div dangerouslySetInnerHTML={{ __html: htmlWithFixedLinks }} />
+  const htmlWithFixedRelativeLinks = fixRelativeLinksForGatsby(html)
+  const htmlWithFixedLinkSlugs = fixSlugInLocalMarkdownLinks(htmlWithFixedRelativeLinks)
+  return <div dangerouslySetInnerHTML={{ __html: htmlWithFixedLinkSlugs }} />
 }
 export default LogPage
 

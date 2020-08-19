@@ -9,8 +9,9 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   // Add slugs to markdown nodes
   if (node.internal.type === 'MarkdownRemark') {
     const fileNode = getNode(node.parent)
-    let slug = fileNode.relativePath
+    let slug = path.join(fileNode.relativeDirectory, fileNode.name)
     if (!slug.startsWith('/')) { slug = '/' + slug }
+    if (!slug.endsWith('/')) { slug = slug + '/' }
 
     const { createNodeField } = actions
     createNodeField({
@@ -25,7 +26,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createRedirect } = actions
   createRedirect({
     fromPath: '/',
-    toPath: '/README.md',
+    toPath: '/README/',
     force: true,
     redirectInBrowser: true,
     statusCode: 200
