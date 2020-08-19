@@ -52,4 +52,16 @@ describe('Fix relative markdown links for Gatsby', () => {
     const fixedHtml = fixRelativeLinksForGatsby(html)
     expect(fixedHtml).toContain('href="http://example.com"')
   })
+
+  it('leaves mail link as is.', () => {
+    const html = '<div><a href="mailto:somebody@example.com"></a></div>'
+    const fixedHtml = fixRelativeLinksForGatsby(html)
+    expect(fixedHtml).toContain('href="mailto:somebody@example.com"')
+  })
+
+  it('leaves tel link as is.', () => {
+    const html = '<div><a href="tel:+123456789"></a></div>'
+    const fixedHtml = fixRelativeLinksForGatsby(html)
+    expect(fixedHtml).toContain('href="tel:+123456789"')
+  })
 })
