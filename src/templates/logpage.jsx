@@ -3,6 +3,8 @@ import { graphql } from 'gatsby'
 
 import cheerio from 'cheerio'
 
+import Layout from '../components/layout'
+
 export const fixRelativeLinksForGatsby = (html) => {
   const $ = cheerio.load(html)
   $('a[href]').toArray().map((elem) => {
@@ -44,7 +46,11 @@ export const LogPage = ({ data }) => {
   const html = data.markdownRemark.html
   const htmlWithFixedRelativeLinks = fixRelativeLinksForGatsby(html)
   const htmlWithFixedLinkSlugs = fixSlugInLocalMarkdownLinks(htmlWithFixedRelativeLinks)
-  return <div dangerouslySetInnerHTML={{ __html: htmlWithFixedLinkSlugs }} />
+  return (
+    <Layout>
+      <div dangerouslySetInnerHTML={{ __html: htmlWithFixedLinkSlugs }} />
+    </Layout>
+  )
 }
 export default LogPage
 
