@@ -4,10 +4,7 @@ import { Link, useStaticQuery, graphql } from 'gatsby'
 import style from './nav.module.css'
 
 const navToggleClick = (event) => {
-  console.log('Toggle Click')
-  console.log(style.collapsed)
   const nav = document.getElementById('nav')
-  console.log(nav.classList)
   nav.classList.toggle(style.collapsed)
 }
 
@@ -54,7 +51,7 @@ const Nav = () => {
       <ul>
         {menuEntries}
       </ul>
-      <button className={style.toggle} onClick={navToggleClick}>X</button>
+      <button type='button' className={style.toggler + ' ' + style.screenReader} onClick={navToggleClick}>Toggle navigation menu</button>
     </nav>
   )
 }
