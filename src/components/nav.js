@@ -33,11 +33,12 @@ const Nav = () => {
   const menuEntries = topLevelPages.map((item) => {
     return (
       <li key={item.node.id}>
-        <a href={item.node.fields.slug}>{item.node.parent.name.toUpperCase()}</a>
+        <Link to={item.node.fields.slug}>
+          {item.node.parent.name.toUpperCase()}
+        </Link>
       </li>
     )
   })
-  console.log(menuEntries)
   return (
     <nav>
       <ul>
