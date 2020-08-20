@@ -117,6 +117,12 @@ describe('Add target to external links', () => {
     const processedLinkHtml = addTargetToExternalLink(linkHtml)
     expect(processedLinkHtml).toBe('<a href="http://example.com/site.md" target="_blank"></a>')
   })
+
+  it('leaves local link as is', () => {
+    const linkHtml = '<a href="/site/"></a>'
+    const processedLinkHtml = addTargetToExternalLink(linkHtml)
+    expect(processedLinkHtml).toBe('<a href="/site/"></a>')
+  })
 })
 
 describe('Process raw markdown HTML', () => {
