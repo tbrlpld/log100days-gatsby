@@ -6,41 +6,33 @@ import cheerio from 'cheerio'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 
-export const fixRelativeLinksForGatsby = (html) => {
-  const $ = cheerio.load(html)
-  $('a[href]').toArray().map((elem) => {
-    if (
-      !elem.attribs.href.startsWith('/') &&
-      !elem.attribs.href.startsWith('http://') &&
-      !elem.attribs.href.startsWith('https://') &&
-      !elem.attribs.href.startsWith('mailto:') &&
-      !elem.attribs.href.startsWith('tel:')
-    ) {
-      elem.attribs.href = '../' + elem.attribs.href
-    }
-    return elem
-  })
-  return $.html()
+export const fixRelativeLinksForGatsby = (href) => {
+  if (
+    !href.startsWith('/') &&
+    !href.startsWith('http://') &&
+    !href.startsWith('https://') &&
+    !href.startsWith('mailto:') &&
+    !href.startsWith('tel:')
+  ) {
+    href = '../' + href
+  }
+  return href
 }
 
-export const fixSlugInLocalMarkdownLinks = (html) => {
-  const $ = cheerio.load(html)
-  $('a[href]').toArray().map((elem) => {
-    if (
-      !elem.attribs.href.startsWith('http://') &&
-      !elem.attribs.href.startsWith('https://') &&
-      !elem.attribs.href.startsWith('mailto:') &&
-      !elem.attribs.href.startsWith('tel:')
-    ) {
-      if (elem.attribs.href.endsWith('.md')) {
-        elem.attribs.href = elem.attribs.href.slice(0, -3) + '/'
-      } else if (elem.attribs.href.endsWith('.md/')) {
-        elem.attribs.href = elem.attribs.href.slice(0, -4) + '/'
-      }
+export const fixSlugInLocalMarkdownLinks = (href) => {
+  if (
+    !href.startsWith('http://') &&
+      !href.startsWith('https://') &&
+      !href.startsWith('mailto:') &&
+      !href.startsWith('tel:')
+  ) {
+    if (href.endsWith('.md')) {
+      href = href.slice(0, -3) + '/'
+    } else if (href.endsWith('.md/')) {
+      href = href.slice(0, -4) + '/'
     }
-    return elem
-  })
-  return $.html()
+  }
+  return href
 }
 
 export const LogPage = ({ data }) => {

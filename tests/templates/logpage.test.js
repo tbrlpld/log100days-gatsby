@@ -71,7 +71,7 @@ describe('Fix relative markdown links for Gatsby', () => {
   })
 })
 
-describe('Update local markdown to slug definition', () => {
+describe('Update local markdown file name to slug definition', () => {
   it('removes .md and adds trailing / to sibling link.', () => {
     const href = 'sibling.md'
     const fixedHref = fixSlugInLocalMarkdownLinks(href)
