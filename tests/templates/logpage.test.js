@@ -2,6 +2,7 @@
 
 const { fixRelativeLinksForGatsby } = require('../../src/templates/logpage.jsx')
 const { fixSlugInLocalMarkdownLinks } = require('../../src/templates/logpage.jsx')
+const { addTargetToExternalLink } = require('../../src/templates/logpage.jsx')
 const { processRawMarkdownHtml } = require('../../src/templates/logpage.jsx')
 
 /*
@@ -107,6 +108,14 @@ describe('Update local markdown file name to slug definition', () => {
     const href = 'tel:+123456789'
     const fixedHref = fixSlugInLocalMarkdownLinks(href)
     expect(fixedHref).toBe('tel:+123456789')
+  })
+})
+
+describe('Add target to external links', () => {
+  it('works with http link', () => {
+    const linkHtml = '<a href="http://example.com/site.md"></a>'
+    const processedLinkHtml = addTargetToExternalLink(linkHtml)
+    expect(processedLinkHtml).toBe('<a href="http://example.com/site.md" target="_blank"></a>')
   })
 })
 

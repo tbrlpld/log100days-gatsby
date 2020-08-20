@@ -35,6 +35,13 @@ export const fixSlugInLocalMarkdownLinks = (href) => {
   return href
 }
 
+export const addTargetToExternalLink = (html) => {
+  const $ = cheerio.load(html)
+  const linkElement = $('a')
+  linkElement.attr('target', '_blank')
+  return linkElement.toString()
+}
+
 export const processRawMarkdownHtml = (html) => {
   const $ = cheerio.load(html)
   $('a[href]').toArray().map((item) => {
