@@ -3,11 +3,6 @@ import { Link, useStaticQuery, graphql } from 'gatsby'
 
 import style from './nav.module.css'
 
-const navToggleClick = (event) => {
-  const nav = document.getElementById('nav')
-  nav.classList.toggle(style.collapsed)
-}
-
 const Nav = () => {
   const data = useStaticQuery(graphql`
     {
@@ -37,21 +32,18 @@ const Nav = () => {
     )
   })
   topLevelPages.sort((a, b) => a.node.parent.name > b.node.parent.name)
-  const menuEntries = topLevelPages.map((item) => {
-    return (
-      <li key={item.node.id}>
-        <Link to={item.node.fields.slug}>
-          {item.node.parent.name.toUpperCase()}
-        </Link>
-      </li>
-    )
-  })
+  const menuEntries = topLevelPages.map((item) => (
+    <li key={item.node.id}>
+      <Link to={item.node.fields.slug}>
+        {item.node.parent.name.toUpperCase()}
+      </Link>
+    </li>
+  ))
   return (
-    <nav id='nav' className={style.nav + ' ' + style.collapsed}>
+    <nav id='nav' className={style.nav}>
       <ul>
         {menuEntries}
       </ul>
-      <button type='button' className={style.toggler + ' ' + style.screenReader} onClick={navToggleClick}>Toggle navigation menu</button>
     </nav>
   )
 }

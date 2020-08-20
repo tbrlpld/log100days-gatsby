@@ -5,17 +5,25 @@ import React from 'react'
 import Nav from './nav'
 import style from './header.module.css'
 
+const collapsibleToggleClick = (event) => {
+  const collapsibleContainer = event.target.parentElement
+  collapsibleContainer.classList.toggle(style.collapsed)
+}
+
 const Header = ({ siteTitle, author, authorHomePage }) => {
   const authorElement = author
     ? <>{' by '}<a href={authorHomePage}>{author}</a></>
     : <></>
   return (
     <header className={style.header}>
-      <div>
-        <div className={style.siteTitle}><Link to='/'>{siteTitle}</Link></div>
-        <div className={style.siteAuthor}>{authorElement}</div>
+      <div className={style.siteTitle}><Link to='/'>{siteTitle}</Link></div>
+      <div className={style.collapsibleContainer}>
+        <div className={style.collapsible}>
+          <div className={style.siteAuthor}>{authorElement}</div>
+          <Nav />
+        </div>
+        <button className={style.toggler} onClick={collapsibleToggleClick}>Toggle navigation menu</button>
       </div>
-      <Nav />
     </header>
   )
 }

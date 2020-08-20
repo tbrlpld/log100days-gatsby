@@ -33,3 +33,37 @@
   font-weight: bolder;
   /*font-size: 6vw;*/
 }
+
+
+.collapsibleContainer.collapsed .collapsible {
+  display: none;
+}
+
+.collapsibleContainer .toggler {
+  display: block;
+  margin: 0 auto;
+  border: none;
+  background: none;
+  font-size: 0;
+}
+
+.collapsibleContainer .toggler::before {
+  content: '\2715';
+  display: block;
+  margin-bottom: -21px;
+  background-color: white;
+  background-color: var(--main-background-color);
+  min-width: 42px;
+  min-height: 42px;
+  border: none;
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+  font-size: 24px;
+  line-height: 42px;
+}
+
+.collapsibleContainer.collapsed .toggler::before {
+  content: '\2630';
+  margin-bottom: -19px;
+}
+
