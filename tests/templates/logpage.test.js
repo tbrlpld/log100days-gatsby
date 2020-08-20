@@ -117,4 +117,10 @@ describe('Process raw markdown HTML', () => {
     expect(processedHTML).toContain('href="../sibling/"')
     expect(processedHTML).not.toContain('href="sibling.md"')
   })
+
+  it('leaves an external link as is', () => {
+    const html = '<div><a href="http://example.com/site.md"></a></div>'
+    const processedHTML = processRawMarkdownHtml(html)
+    expect(processedHTML).toContain('href="http://example.com/site.md"')
+  })
 })

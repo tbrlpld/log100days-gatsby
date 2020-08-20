@@ -36,7 +36,13 @@ export const fixSlugInLocalMarkdownLinks = (href) => {
 }
 
 export const processRawMarkdownHtml = (html) => {
-  return html
+  const $ = cheerio.load(html)
+  $('a[href]').toArray().map((item) => {
+    item.attribs.href = fixRelativeLinksForGatsby(item.attribs.href)
+    item.attribs.href = fixSlugInLocalMarkdownLinks(item.attribs.href)
+    return item
+  })
+  return $.html()
 }
 
 export const LogPage = ({ data }) => {
