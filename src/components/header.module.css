@@ -1,5 +1,5 @@
 .header {
-  margin: 1em;
+  margin: 1em 2em;
   border-bottom: var(--light-border);
   color: black;
   color: var(--main-font-color);
@@ -28,7 +28,7 @@
 }
 
 .siteAuthor {
-  /*line-height: 0.9;*/
+  line-height: 1.6;
   text-align: center;
   font-weight: bolder;
   /*font-size: 6vw;*/

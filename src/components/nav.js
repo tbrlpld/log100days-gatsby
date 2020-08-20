@@ -3,6 +3,14 @@ import { Link, useStaticQuery, graphql } from 'gatsby'
 
 import style from './nav.module.css'
 
+const navToggleClick = (event) => {
+  console.log('Toggle Click')
+  console.log(style.collapsed)
+  const nav = document.getElementById('nav')
+  console.log(nav.classList)
+  nav.classList.toggle(style.collapsed)
+}
+
 const Nav = () => {
   const data = useStaticQuery(graphql`
     {
@@ -42,10 +50,11 @@ const Nav = () => {
     )
   })
   return (
-    <nav className={style.nav}>
+    <nav id='nav' className={style.nav + ' ' + style.collapsed}>
       <ul>
         {menuEntries}
       </ul>
+      <button className={style.toggle} onClick={navToggleClick}>X</button>
     </nav>
   )
 }
