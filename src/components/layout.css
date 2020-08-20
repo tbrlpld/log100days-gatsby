@@ -129,3 +129,8 @@ footer {
   border-top: var(--light-border);
   text-align: center;
 }
+
+main {
+  margin: 0 2em;
+  overflow-wrap: break-word;
+}
