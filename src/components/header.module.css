@@ -1,0 +1,32 @@
+.header {
+  padding: 1em;
+  color: hsl(0, 0%, 20%);
+}
+
+.header a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.header a:hover {
+  color: hsl(0, 0%, 20%);
+  text-decoration: none;
+}
+
+.header a:visited {
+  color: hsl(0, 0%, 20%);
+  text-decoration: none;
+}
+
+.siteTitle {
+  font-weight: bolder;
+  font-size: 10vw;
+  line-height: 0.9;
+}
+
+.siteAuthor {
+  text-align: right;
+  font-weight: bolder;
+  font-size: 8vw;
+  line-height: 0.9;
+}

@@ -3,18 +3,17 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import Nav from './nav'
+import style from './header.module.css'
 
 const Header = ({ siteTitle, author, authorHomePage }) => {
   const authorElement = author
     ? <>{' by '}<a href={authorHomePage}>{author}</a></>
     : <></>
   return (
-    <header>
+    <header className={style.header}>
       <div>
-        <h1>
-          <Link to='/'>{siteTitle}</Link>
-          {authorElement}
-        </h1>
+        <div className={style.siteTitle}><Link to='/'>{siteTitle}</Link></div>
+        <div className={style.siteAuthor}>{authorElement}</div>
       </div>
       <Nav />
     </header>

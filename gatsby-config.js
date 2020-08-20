@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: '#100DaysOfCode Log',
+    title: '#100DaysOfCode',
     description: 'Log for the #100DaysOfCode challange.',
     author: '@tbrlpld',
     homepage: 'https://lpld.io'
