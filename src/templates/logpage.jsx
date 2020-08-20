@@ -48,13 +48,12 @@ export const processRawMarkdownHtml = (html) => {
 export const LogPage = ({ data }) => {
   const pageName = data.markdownRemark.parent.name
   const html = data.markdownRemark.html
-  const htmlWithFixedRelativeLinks = fixRelativeLinksForGatsby(html)
-  const htmlWithFixedLinkSlugs = fixSlugInLocalMarkdownLinks(htmlWithFixedRelativeLinks)
+  const processedHTML = processRawMarkdownHtml(html)
   return (
     <>
       <SEO title={pageName} />
       <Layout>
-        <div dangerouslySetInnerHTML={{ __html: htmlWithFixedLinkSlugs }} />
+        <div dangerouslySetInnerHTML={{ __html: processedHTML }} />
       </Layout>
     </>
   )
