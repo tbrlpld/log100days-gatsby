@@ -5,7 +5,7 @@ const { fixSlugInLocalMarkdownLinks } = require('../../src/templates/logpage.jsx
 
 /*
 Solve links between pages. Because Gatsby creates every page as its own directory
-with a `index.html` in it, the URL have a trailing `/`.
+with a `index.href` in it, the URL have a trailing `/`.
 
 This also means that the relative markdown links that are going up are wrong.
 E.g. the `/intl/de/README.md` defines a link as  `../es/README.md`. This does
@@ -29,86 +29,82 @@ with `../` to navigate out of the current directory.
 */
 describe('Fix relative markdown links for Gatsby', () => {
   it('adds ../ to sibling link.', () => {
-    const html = '<div><a href="sibling.md"></a></div>'
-    const fixedHtml = fixRelativeLinksForGatsby(html)
-    expect(fixedHtml).toContain('href="../sibling.md"')
-    expect(fixedHtml).not.toContain('href="sibling.md"')
+    const href = 'sibling.md'
+    const fixedHref = fixRelativeLinksForGatsby(href)
+    expect(fixedHref).toBe('../sibling.md')
   })
 
   it('adds ../ to local relative link to file in other directory.', () => {
-    const html = '<div><a href="../other-parent/child.md"></a></div>'
-    const fixedHtml = fixRelativeLinksForGatsby(html)
-    expect(fixedHtml).toContain('href="../../other-parent/child.md"')
-    expect(fixedHtml).not.toContain('href="../other-parent/child.md"')
+    const href = '../other-parent/child.md'
+    const fixedHref = fixRelativeLinksForGatsby(href)
+    expect(fixedHref).toBe('../../other-parent/child.md')
   })
 
   it('leaves absolute local link as is.', () => {
-    const html = '<div><a href="/sibling.md"></a></div>'
-    const fixedHtml = fixRelativeLinksForGatsby(html)
-    expect(fixedHtml).toContain('href="/sibling.md"')
+    const href = '/sibling.md'
+    const fixedHref = fixRelativeLinksForGatsby(href)
+    expect(fixedHref).toBe('/sibling.md')
   })
 
   it('leaves external link as is.', () => {
-    const html = '<div><a href="http://example.com"></a></div>'
-    const fixedHtml = fixRelativeLinksForGatsby(html)
-    expect(fixedHtml).toContain('href="http://example.com"')
+    const href = 'http://example.com'
+    const fixedHref = fixRelativeLinksForGatsby(href)
+    expect(fixedHref).toBe('http://example.com')
   })
 
   it('leaves external link (https) as is.', () => {
-    const html = '<div><a href="https://example.com"></a></div>'
-    const fixedHtml = fixRelativeLinksForGatsby(html)
-    expect(fixedHtml).toContain('href="https://example.com"')
+    const href = 'https://example.com'
+    const fixedHref = fixRelativeLinksForGatsby(href)
+    expect(fixedHref).toBe('https://example.com')
   })
 
   it('leaves mail link as is.', () => {
-    const html = '<div><a href="mailto:somebody@example.com"></a></div>'
-    const fixedHtml = fixRelativeLinksForGatsby(html)
-    expect(fixedHtml).toContain('href="mailto:somebody@example.com"')
+    const href = 'mailto:somebody@example.com'
+    const fixedHref = fixRelativeLinksForGatsby(href)
+    expect(fixedHref).toBe('mailto:somebody@example.com')
   })
 
   it('leaves tel link as is.', () => {
-    const html = '<div><a href="tel:+123456789"></a></div>'
-    const fixedHtml = fixRelativeLinksForGatsby(html)
-    expect(fixedHtml).toContain('href="tel:+123456789"')
+    const href = 'tel:+123456789'
+    const fixedHref = fixRelativeLinksForGatsby(href)
+    expect(fixedHref).toBe('tel:+123456789')
   })
 })
 
 describe('Update local markdown to slug definition', () => {
   it('removes .md and adds trailing / to sibling link.', () => {
-    const html = '<div><a href="sibling.md"></a></div>'
-    const fixedHtml = fixSlugInLocalMarkdownLinks(html)
-    expect(fixedHtml).toContain('href="sibling/"')
-    expect(fixedHtml).not.toContain('href="sibling.md"')
+    const href = 'sibling.md'
+    const fixedHref = fixSlugInLocalMarkdownLinks(href)
+    expect(fixedHref).toBe('sibling/')
   })
 
   it('removes .md from sibling link already ending with /.', () => {
-    const html = '<div><a href="sibling.md/"></a></div>'
-    const fixedHtml = fixSlugInLocalMarkdownLinks(html)
-    expect(fixedHtml).toContain('href="sibling/"')
-    expect(fixedHtml).not.toContain('href="sibling.md/"')
+    const href = 'sibling.md/'
+    const fixedHref = fixSlugInLocalMarkdownLinks(href)
+    expect(fixedHref).toBe('sibling/')
   })
 
   it('leaves external link as is (even if ending in .md).', () => {
-    const html = '<div><a href="http://example.com/site.md"></a></div>'
-    const fixedHtml = fixSlugInLocalMarkdownLinks(html)
-    expect(fixedHtml).toContain('href="http://example.com/site.md"')
+    const href = 'http://example.com/site.md'
+    const fixedHref = fixSlugInLocalMarkdownLinks(href)
+    expect(fixedHref).toBe('http://example.com/site.md')
   })
 
   it('leaves external link (https) as is (even if ending in .md).', () => {
-    const html = '<div><a href="https://example.com/site.md"></a></div>'
-    const fixedHtml = fixSlugInLocalMarkdownLinks(html)
-    expect(fixedHtml).toContain('href="https://example.com/site.md"')
+    const href = 'https://example.com/site.md'
+    const fixedHref = fixSlugInLocalMarkdownLinks(href)
+    expect(fixedHref).toBe('https://example.com/site.md')
   })
 
   it('leaves mail link as is (even if ending in .md).', () => {
-    const html = '<div><a href="mailto:somebody@example.md"></a></div>'
-    const fixedHtml = fixSlugInLocalMarkdownLinks(html)
-    expect(fixedHtml).toContain('href="mailto:somebody@example.md"')
+    const href = 'mailto:somebody@example.md'
+    const fixedHref = fixSlugInLocalMarkdownLinks(href)
+    expect(fixedHref).toBe('mailto:somebody@example.md')
   })
 
   it('leaves tel link as is.', () => {
-    const html = '<div><a href="tel:+123456789"></a></div>'
-    const fixedHtml = fixSlugInLocalMarkdownLinks(html)
-    expect(fixedHtml).toContain('href="tel:+123456789"')
+    const href = 'tel:+123456789'
+    const fixedHref = fixSlugInLocalMarkdownLinks(href)
+    expect(fixedHref).toBe('tel:+123456789')
   })
 })
