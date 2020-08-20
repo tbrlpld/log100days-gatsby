@@ -2,6 +2,7 @@
 
 const { fixRelativeLinksForGatsby } = require('../../src/templates/logpage.jsx')
 const { fixSlugInLocalMarkdownLinks } = require('../../src/templates/logpage.jsx')
+const { processRawMarkdownHtml } = require('../../src/templates/logpage.jsx')
 
 /*
 Solve links between pages. Because Gatsby creates every page as its own directory
@@ -106,5 +107,14 @@ describe('Update local markdown file name to slug definition', () => {
     const href = 'tel:+123456789'
     const fixedHref = fixSlugInLocalMarkdownLinks(href)
     expect(fixedHref).toBe('tel:+123456789')
+  })
+})
+
+describe('Process raw markdown HTML', () => {
+  it('fixes converts relative markdown file links to Gatsby slugs', () => {
+    const html = '<div><a href="sibling.md"></a></div>'
+    const processedHTML = processRawMarkdownHtml(html)
+    expect(processedHTML).toContain('href="../sibling/"')
+    expect(processedHTML).not.toContain('href="sibling.md"')
   })
 })

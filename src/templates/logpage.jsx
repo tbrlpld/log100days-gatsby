@@ -35,6 +35,10 @@ export const fixSlugInLocalMarkdownLinks = (href) => {
   return href
 }
 
+export const processRawMarkdownHtml = (html) => {
+  return html
+}
+
 export const LogPage = ({ data }) => {
   const pageName = data.markdownRemark.parent.name
   const html = data.markdownRemark.html
