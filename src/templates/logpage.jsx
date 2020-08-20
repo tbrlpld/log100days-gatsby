@@ -38,9 +38,9 @@ export const fixSlugInLocalMarkdownLinks = (href) => {
 export const processRawMarkdownHtml = (html) => {
   const $ = cheerio.load(html)
   $('a[href]').map((index, item) => {
-    item.attribs.href = fixRelativeLinksForGatsby(item.attribs.href)
-    item.attribs.href = fixSlugInLocalMarkdownLinks(item.attribs.href)
-    return item
+    $(item).attr('href', fixRelativeLinksForGatsby(item.attribs.href))
+    $(item).attr('href', fixSlugInLocalMarkdownLinks(item.attribs.href))
+    return $(item)
   })
   $('a[href^=http]').map((index, item) => $(item).attr('target', '_blank'))
   return $.html()
