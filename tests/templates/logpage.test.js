@@ -2,7 +2,6 @@
 
 const { fixRelativeLinksForGatsby } = require('../../src/templates/logpage.jsx')
 const { fixSlugInLocalMarkdownLinks } = require('../../src/templates/logpage.jsx')
-const { addTargetToExternalLink } = require('../../src/templates/logpage.jsx')
 const { processRawMarkdownHtml } = require('../../src/templates/logpage.jsx')
 
 /*
@@ -111,20 +110,6 @@ describe('Update local markdown file name to slug definition', () => {
   })
 })
 
-describe('Add target to external links', () => {
-  it('works with http link', () => {
-    const linkHtml = '<a href="http://example.com/site.md"></a>'
-    const processedLinkHtml = addTargetToExternalLink(linkHtml)
-    expect(processedLinkHtml).toBe('<a href="http://example.com/site.md" target="_blank"></a>')
-  })
-
-  it('leaves local link as is', () => {
-    const linkHtml = '<a href="/site/"></a>'
-    const processedLinkHtml = addTargetToExternalLink(linkHtml)
-    expect(processedLinkHtml).toBe('<a href="/site/"></a>')
-  })
-})
-
 describe('Process raw markdown HTML', () => {
   it('fixes converts relative markdown file links to Gatsby slugs', () => {
     const html = '<div><a href="sibling.md"></a></div>'
@@ -133,9 +118,9 @@ describe('Process raw markdown HTML', () => {
     expect(processedHTML).not.toContain('href="sibling.md"')
   })
 
-  it('leaves an external link as is', () => {
+  it('adds target to external link', () => {
     const html = '<div><a href="http://example.com/site.md"></a></div>'
     const processedHTML = processRawMarkdownHtml(html)
-    expect(processedHTML).toContain('href="http://example.com/site.md"')
+    expect(processedHTML).toContain('<a href="http://example.com/site.md" target="_blank"></a>')
   })
 })

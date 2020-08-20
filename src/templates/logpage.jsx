@@ -35,22 +35,14 @@ export const fixSlugInLocalMarkdownLinks = (href) => {
   return href
 }
 
-export const addTargetToExternalLink = (html) => {
-  const $ = cheerio.load(html)
-  const linkElement = $('a')
-  if (linkElement.attr('href').startsWith('http')) {
-    linkElement.attr('target', '_blank')
-  }
-  return linkElement.toString()
-}
-
 export const processRawMarkdownHtml = (html) => {
   const $ = cheerio.load(html)
-  $('a[href]').toArray().map((item) => {
+  $('a[href]').map((index, item) => {
     item.attribs.href = fixRelativeLinksForGatsby(item.attribs.href)
     item.attribs.href = fixSlugInLocalMarkdownLinks(item.attribs.href)
     return item
   })
+  $('a[href^=http]').map((index, item) => $(item).attr('target', '_blank'))
   return $.html()
 }
 
