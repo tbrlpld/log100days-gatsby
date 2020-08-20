@@ -122,3 +122,10 @@ hr {
   border: none;
   border-top: var(--light-border);
 }
+
+footer {
+  margin: 2em 2em 0;
+  padding: 2em;
+  border-top: var(--light-border);
+  text-align: center;
+}
