@@ -2,6 +2,8 @@ import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import Nav from './nav'
+
 const Header = ({ siteTitle, author, authorHomePage }) => {
   const authorElement = author
     ? <>{' by '}<a href={authorHomePage}>{author}</a></>
@@ -14,6 +16,7 @@ const Header = ({ siteTitle, author, authorHomePage }) => {
           {authorElement}
         </h1>
       </div>
+      <Nav />
     </header>
   )
 }
