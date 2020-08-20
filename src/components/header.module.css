@@ -1,6 +1,8 @@
 .header {
-  padding: 1em;
-  color: hsl(0, 0%, 20%);
+  margin: 1em;
+  border-bottom: var(--light-border);
+  color: black;
+  color: var(--main-font-color);
 }
 
 .header a {
@@ -9,24 +11,25 @@
 }
 
 .header a:hover {
-  color: hsl(0, 0%, 20%);
+  color: inherit;
   text-decoration: none;
 }
 
 .header a:visited {
-  color: hsl(0, 0%, 20%);
+  color: inherit;
   text-decoration: none;
 }
 
 .siteTitle {
+  line-height: 1.2;
+  text-align: center;
   font-weight: bolder;
   font-size: 10vw;
-  line-height: 0.9;
 }
 
 .siteAuthor {
-  text-align: right;
+  /*line-height: 0.9;*/
+  text-align: center;
   font-weight: bolder;
-  font-size: 8vw;
-  line-height: 0.9;
+  /*font-size: 6vw;*/
 }

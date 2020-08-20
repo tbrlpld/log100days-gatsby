@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link, useStaticQuery, graphql } from 'gatsby'
 
+import style from './nav.module.css'
+
 const Nav = () => {
   const data = useStaticQuery(graphql`
     {
@@ -40,7 +42,7 @@ const Nav = () => {
     )
   })
   return (
-    <nav>
+    <nav className={style.nav}>
       <ul>
         {menuEntries}
       </ul>
