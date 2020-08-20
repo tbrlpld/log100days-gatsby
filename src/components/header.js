@@ -17,7 +17,7 @@ const Header = ({ siteTitle, author, authorHomePage }) => {
   return (
     <header className={style.header}>
       <div className={style.siteTitle}><Link to='/'>{siteTitle}</Link></div>
-      <div className={style.collapsibleContainer}>
+      <div className={style.collapsibleContainer + ' ' + style.collapsed}>
         <div className={style.collapsible}>
           <div className={style.siteAuthor}>{authorElement}</div>
           <Nav />
