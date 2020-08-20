@@ -12,7 +12,7 @@ const collapsibleToggleClick = (event) => {
 
 const Header = ({ siteTitle, author, authorHomePage }) => {
   const authorElement = author
-    ? <>{' by '}<a href={authorHomePage}>{author}</a></>
+    ? <>{' by '}<a href={authorHomePage} target='_blank' rel='noopener noreferrer'>{author}</a></>
     : <></>
   return (
     <header className={style.header}>
