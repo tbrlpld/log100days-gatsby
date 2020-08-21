@@ -5,21 +5,6 @@
   box-sizing: border-box;
 }
 
-html,
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-ol,
-ul {
-  margin: 0;
-  padding: 0;
-}
-
 html {
   line-height: 1.6;
   --main-font-color: black;
@@ -34,6 +19,25 @@ html {
   --link-color: hsl(210, 100%, 50%);
   --link-color-visited: hsl(210, 100%, 40%);
   --light-border: 1px solid hsl(0, 0%, 90%);
+}
+
+body {
+  margin: 0;
+  padding: 0 2rem;
+}
+
+html,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
 }
 
 ::selection {
@@ -123,14 +127,14 @@ hr {
   border-top: var(--light-border);
 }
 
+main {
+  overflow-wrap: break-word;
+}
+
 footer {
-  margin: 2em 2em 0;
+  margin-top: 2em;
   padding: 2em;
   border-top: var(--light-border);
   text-align: center;
 }
 
-main {
-  margin: 0 2em;
-  overflow-wrap: break-word;
-}
