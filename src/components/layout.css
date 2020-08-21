@@ -16,8 +16,8 @@ html {
   background-color: white;
   background-color: var(--main-background-color);
   --accent-background: hsl(204, 15%, 94%);  
-  --link-color: hsl(210, 100%, 50%);
-  --link-color-visited: hsl(210, 100%, 40%);
+  --link-color: hsl(210, 100%, 43%);
+  --link-color-visited: hsl(330, 100%, 60%);
   --light-border: 1px solid hsl(0, 0%, 90%);
 }
 
