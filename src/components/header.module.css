@@ -11,6 +11,7 @@
   background-color: var(--main-background-color);
   color: black;
   color: var(--main-font-color);
+  box-shadow: 0px 5px 3px -3px hsla(0, 0%, 70%, 0.1);
 }
 
 .header a {
