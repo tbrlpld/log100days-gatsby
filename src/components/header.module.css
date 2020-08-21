@@ -1,12 +1,17 @@
 .header {
-  margin: 1rem auto;
+  position: fixed;
+  top: 0;
+  left: 1rem;
+  right: 1rem;
+  margin: 0 auto;
+  padding: 1rem 1rem 0;
   max-width: 800px;
   border-bottom: var(--light-border);
+  background-color: white;
+  background-color: var(--main-background-color);
   color: black;
   color: var(--main-font-color);
 }
-
-
 
 .header a {
   color: inherit;
@@ -78,7 +83,7 @@
 
 @media (min-width: 550px) and (min-height: 500px) {
   .header {
-    margin-top: 2em;
+    padding-top: 2em;
   }
 
   .collapsibleContainer.collapsed .collapsible {

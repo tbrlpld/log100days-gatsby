@@ -128,9 +128,15 @@ hr {
 }
 
 main {
-  margin: 0 auto;
+  margin: 150px auto 0;
   max-width: 60ch;
   overflow-wrap: break-word;
+}
+
+@media (min-width: 550px) and (min-height: 500px) {
+  main {
+    margin-top: 224px;
+  }
 }
 
 footer {
