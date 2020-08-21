@@ -4,8 +4,9 @@
 }
 
 .nav ul li {
-  margin: 0;
   display: block;
+  margin: 0;
+  padding: 0;
 
   list-style: none;
   text-align: center;
@@ -17,4 +18,31 @@
   padding: 0.5em;
   min-height: 42px;
   min-width: 42px;
+}
+
+@media (min-width: 550px) {
+  .nav ul {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .nav ul li {
+    display: inline-block;
+  }
+
+  .nav ul li a:first-of-type {
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  .nav ul li a:last-of-type {
+    margin-right: 0;
+    padding-right: 0;
+  }
+}
+
+@media (min-width: 550px) and (min-height: 500px) {
+  .nav {
+    margin-top: 0.5em;
+  }
 }

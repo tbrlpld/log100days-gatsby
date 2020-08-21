@@ -73,3 +73,16 @@
   margin-bottom: -19px;
 }
 
+@media (min-width: 550px) and (min-height: 500px) {
+  .header {
+    margin-top: 2em;
+  }
+
+  .collapsibleContainer.collapsed .collapsible {
+    display: initial;
+  }
+
+  .collapsibleContainer .toggler {
+    display: none;
+  }
+}
