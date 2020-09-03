@@ -1,5 +1,6 @@
 @font-face {
   font-family: 'Libre Baskerville';
+  font-display: swap;
   src: 
     url('./LibreBaskerville-Regular.ttf') format('opentype'),
     url('./LibreBaskerville-Bold.ttf') format('opentype'),

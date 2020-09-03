@@ -1,7 +1,7 @@
 @import url('../fonts/typography.css');
 
 * {
-  font-family: "Libre Baskerville", serif;
+  font-family: "Libre Baskerville", Georgia, serif;
   box-sizing: border-box;
 }
 
